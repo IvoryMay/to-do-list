@@ -8,26 +8,25 @@ const taskTotal = document.querySelector("#taskTotal");
 
 //Actions ( Business Logic )
 
-
 const updateTaskTotal = () => {
-    // count list and update
-    const lists = document.querySelectorAll(".list");
-    taskTotal.innerText = lists.length;
-}
+  // count list and update
+  const lists = document.querySelectorAll(".list");
+  taskTotal.innerText = lists.length;
+};
 
 const updateDoneTaskTotal = () => {
-    // count list and update
-    const lists = document.querySelectorAll(".list input:checked");
-    doneTaskTotal.innerText = lists.length;
-}
+  // count list and update
+  const lists = document.querySelectorAll(".list input:checked");
+  doneTaskTotal.innerText = lists.length;
+};
 
 //create new list
 const createNewList = (currentTask) => {
-    const list = document.createElement("div");
-    list.classList.add("list");
-    list.id = "list"+ Date.now();
-    // list.id = "list"+ count++ ;
-    list.innerHTML = `<div class=" flex justify-between border border-stone-950 p-3 mb-3">
+  const list = document.createElement("div");
+  list.classList.add("list");
+  list.id = "list" + Date.now();
+  // list.id = "list"+ count++ ;
+  list.innerHTML = `<div class=" flex justify-between border border-stone-950 p-3 mb-3">
           <div class="flex gap-2 items-center">
             <input type="checkbox" class="list-done-check accent-stone-950" />
             <p class="font-serif list-task">${currentTask}</p>
@@ -44,147 +43,139 @@ const createNewList = (currentTask) => {
           </div>
         </div>`;
 
-        // const listDoneCheck = list.querySelector(".list-done-check");
-        // const listTask = list.querySelector(".list-task");
-        // const listDelBtn = list.querySelector(".list-del-btn"); 
-        // const listEditBtn = list.querySelector(".list-edit-btn");
+  // const listDoneCheck = list.querySelector(".list-done-check");
+  // const listTask = list.querySelector(".list-task");
+  // const listDelBtn = list.querySelector(".list-del-btn");
+  // const listEditBtn = list.querySelector(".list-edit-btn");
 
+  // listDoneCheck.addEventListener("change",() => {
+  //     updateDoneTaskTotal();
+  //     listTask.classList.toggle("line-through");
+  //     listTask.classList.toggle("duration-200");
+  //     list.classList.toggle("opacity-20");
+  //     list.classList.toggle("scale-90");
+  //     if(listDoneCheck.checked){
+  //       listEditBtn.setAttribute("disabled",true)
+  //     }else{
+  //       listEditBtn.removeAttribute("disabled");
+  //     }
+  // });
 
-        // listDoneCheck.addEventListener("change",() => {
-        //     updateDoneTaskTotal(); 
-        //     listTask.classList.toggle("line-through");
-        //     listTask.classList.toggle("duration-200");
-        //     list.classList.toggle("opacity-20");
-        //     list.classList.toggle("scale-90");
-        //     if(listDoneCheck.checked){
-        //       listEditBtn.setAttribute("disabled",true)
-        //     }else{
-        //       listEditBtn.removeAttribute("disabled");
-        //     }
-        // });
+  // listDelBtn.addEventListener("click",() => {
+  //   if(window.confirm("Are you sure to delete?")){
+  //     list.remove();
+  //   }
+  // });
 
-        // listDelBtn.addEventListener("click",() => {
-        //   if(window.confirm("Are you sure to delete?")){
-        //     list.remove();
-        //   }
-        // });
+  // listEditBtn.addEventListener("click",() => {
+  //   listEditBtn.setAttribute("disabled",true);
+  //   listDoneCheck.setAttribute("disabled",true);
+  //   const currentTask =listTask.innerText;
+  //   const newTaskInput = document.createElement("input");
+  //   newTaskInput.className=" border border-stone-950 py-1 px-2 w-[180px] "
+  //   newTaskInput.value = currentTask;
+  //   listTask.after(newTaskInput);
+  //   newTaskInput.focus();
+  //   listTask.classList.add("hidden");
 
-        // listEditBtn.addEventListener("click",() => {
-        //   listEditBtn.setAttribute("disabled",true);
-        //   listDoneCheck.setAttribute("disabled",true);
-        //   const currentTask =listTask.innerText;
-        //   const newTaskInput = document.createElement("input");
-        //   newTaskInput.className=" border border-stone-950 py-1 px-2 w-[180px] "
-        //   newTaskInput.value = currentTask;
-        //   listTask.after(newTaskInput);
-        //   newTaskInput.focus();
-        //   listTask.classList.add("hidden");
+  //   newTaskInput.addEventListener("change",() => {
+  //     listEditBtn.removeAttribute("disabled");
+  //     listDoneCheck.removeAttribute("disabled");
+  //     listTask.innerText = newTaskInput.value;
+  //     listTask.classList.remove("hidden");
+  //     newTaskInput.remove();
+  //   });
+  // });
 
-        //   newTaskInput.addEventListener("change",() => {
-        //     listEditBtn.removeAttribute("disabled");
-        //     listDoneCheck.removeAttribute("disabled");
-        //     listTask.innerText = newTaskInput.value;
-        //     listTask.classList.remove("hidden");
-        //     newTaskInput.remove();
-        //   });
-        // });
-
-
-        
-        return list;
+  return list;
 };
 
 const deleteList = (listId) => {
   const currentList = document.querySelector(`#${listId}`);
-  if(window.confirm("Are you sure to delete?")){
+  if (window.confirm("Are you sure to delete?")) {
     currentList.remove();
     updateDoneTaskTotal();
     updateTaskTotal();
   }
-}
-
+};
 
 const editList = (listId) => {
   const currentList = document.querySelector(`#${listId}`);
 
   const listDoneCheck = currentList.querySelector(".list-done-check");
-        const listTask = currentList.querySelector(".list-task");
-        const listDelBtn = currentList.querySelector(".list-del-btn"); 
-        const listEditBtn = currentList.querySelector(".list-edit-btn");
-        
-      listEditBtn.setAttribute("disabled",true);
-          listDoneCheck.setAttribute("disabled",true);
-          const currentTask =listTask.innerText;
-          const newTaskInput = document.createElement("input");
-          newTaskInput.className=" border border-stone-950 py-1 px-2 w-[180px] "
-          newTaskInput.value = currentTask;
-          listTask.after(newTaskInput);
-          newTaskInput.focus();
-          listTask.classList.add("hidden");
+  const listTask = currentList.querySelector(".list-task");
+  const listDelBtn = currentList.querySelector(".list-del-btn");
+  const listEditBtn = currentList.querySelector(".list-edit-btn");
 
-          newTaskInput.addEventListener("change",() => {
-            listEditBtn.removeAttribute("disabled");
-            listDoneCheck.removeAttribute("disabled");
-            listTask.innerText = newTaskInput.value;
-            listTask.classList.remove("hidden");
-            newTaskInput.remove();
-          });
-}
+  listEditBtn.setAttribute("disabled", true);
+  listDoneCheck.setAttribute("disabled", true);
+  const currentTask = listTask.innerText;
+  const newTaskInput = document.createElement("input");
+  newTaskInput.className = " border border-stone-950 py-1 px-2 w-[180px] ";
+  newTaskInput.value = currentTask;
+  listTask.after(newTaskInput);
+  newTaskInput.focus();
+  listTask.classList.add("hidden");
+
+  newTaskInput.addEventListener("change", () => {
+    listEditBtn.removeAttribute("disabled");
+    listDoneCheck.removeAttribute("disabled");
+    listTask.innerText = newTaskInput.value;
+    listTask.classList.remove("hidden");
+    newTaskInput.remove();
+  });
+};
 
 const doneList = (listId) => {
   const currentList = document.querySelector(`#${listId}`);
 
   const listDoneCheck = currentList.querySelector(".list-done-check");
-        const listTask = currentList.querySelector(".list-task");
-        const listDelBtn = currentList.querySelector(".list-del-btn"); 
-        const listEditBtn = currentList.querySelector(".list-edit-btn");
+  const listTask = currentList.querySelector(".list-task");
+  const listDelBtn = currentList.querySelector(".list-del-btn");
+  const listEditBtn = currentList.querySelector(".list-edit-btn");
 
-
-            listTask.classList.toggle("line-through");
-            listTask.classList.add("duration-200");
-            currentList.classList.toggle("opacity-20");
-            currentList.classList.toggle("scale-90");
-            if(listDoneCheck.checked){
-              listEditBtn.setAttribute("disabled",true)
-            }else{
-              listEditBtn.removeAttribute("disabled");
-            }
-            updateDoneTaskTotal(); 
-
-}
-
+  listTask.classList.toggle("line-through");
+  listTask.classList.add("duration-200");
+  currentList.classList.toggle("opacity-20");
+  currentList.classList.toggle("scale-90");
+  if (listDoneCheck.checked) {
+    listEditBtn.setAttribute("disabled", true);
+  } else {
+    listEditBtn.removeAttribute("disabled");
+  }
+  updateDoneTaskTotal();
+};
 
 const addList = (text) => {
   // mount to listGroup
-  listGroup.append(createNewList( text));
+  listGroup.append(createNewList(text));
   taskInput.value = null;
   updateTaskTotal();
 };
 
+// console.log(list);
+// Application Logic
+// Handlers
 
-    // console.log(list);
-    // Application Logic
-    // Handlers
+const listGroupHandler = (event) => {
+  const list = event.target.closest(".list");
+  if (event.target.classList.contains("list-del-btn")) {
+    deleteList(event.target.closest(".list").id);
+  }
 
-    const listGroupHandler = (event) => {
-      const list = event.target.closest(".list");
-    if(event.target.classList.contains("list-del-btn")){
-      deleteList(event.target.closest(".list").id);
-    }
+  if (event.target.classList.contains("list-edit-btn")) {
+    editList(event.target.closest(".list").id);
+  }
 
-    if(event.target.classList.contains("list-edit-btn")){
-      editList(event.target.closest(".list").id);
-    }
+  if (event.target.classList.contains("list-done-check")) {
+    doneList(event.target.closest(".list").id);
+  }
+};
 
-    if(event.target.classList.contains("list-done-check")){
-      doneList(event.target.closest(".list").id);
-    }
-    };
+const addTaskBtnHandler = () => {
+  addList(taskInput.value);
+};
 
-      const addTaskBtnHandler = () => {
-        addList(taskInput.value);
-      };
-    
-    //listener
-    addTaskBtn.addEventListener("click",addTaskBtnHandler);
-    listGroup.addEventListener("click",listGroupHandler)
+//listener
+addTaskBtn.addEventListener("click", addTaskBtnHandler);
+listGroup.addEventListener("click", listGroupHandler);
