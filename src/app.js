@@ -4,14 +4,10 @@ const addTaskBtn = document.querySelector("#addTaskBtn");
 const listGroup = document.querySelector("#listGroup");
 const doneTaskTotal = document.querySelector("#doneTaskTotal");
 const taskTotal = document.querySelector("#taskTotal");
+// let count = 1;
 
-//process
-const addList = () => {
-    // mount to listGroup
-    listGroup.append(createNewList( taskInput.value));
-    taskInput.value = null;
-    updateTaskTotal();
-};
+//Actions ( Business Logic )
+
 
 const updateTaskTotal = () => {
     // count list and update
@@ -29,6 +25,8 @@ const updateDoneTaskTotal = () => {
 const createNewList = (currentTask) => {
     const list = document.createElement("div");
     list.classList.add("list");
+    list.id = "list"+ Date.now();
+    // list.id = "list"+ count++ ;
     list.innerHTML = `<div class=" flex justify-between border border-stone-950 p-3 mb-3">
           <div class="flex gap-2 items-center">
             <input type="checkbox" class="list-done-check accent-stone-950" />
@@ -96,25 +94,23 @@ const createNewList = (currentTask) => {
         return list;
 };
 
+const deleteList = (listId) => {
+  const currentList = document.querySelector(`#${listId}`);
+  if(window.confirm("Are you sure to delete?")){
+    currentList.remove();
+    updateDoneTaskTotal();
+    updateTaskTotal();
+  }
+}
 
 
-    // console.log(list);
+const editList = (listId) => {
+  const currentList = document.querySelector(`#${listId}`);
 
-    const listGroupHandler = (event) => {
-      const list = event.target.closest(".list");
-    if(event.target.classList.contains("list-del-btn")){
-      if(window.confirm("Are you sure to delete?")){
-            list.remove();
-            updateDoneTaskTotal();
-            updateTaskTotal();
-          }
-    }
-
-    if(event.target.classList.contains("list-edit-btn")){
-      const listDoneCheck = list.querySelector(".list-done-check");
-        const listTask = list.querySelector(".list-task");
-        const listDelBtn = list.querySelector(".list-del-btn"); 
-        const listEditBtn = list.querySelector(".list-edit-btn");
+  const listDoneCheck = currentList.querySelector(".list-done-check");
+        const listTask = currentList.querySelector(".list-task");
+        const listDelBtn = currentList.querySelector(".list-del-btn"); 
+        const listEditBtn = currentList.querySelector(".list-edit-btn");
         
       listEditBtn.setAttribute("disabled",true);
           listDoneCheck.setAttribute("disabled",true);
@@ -133,19 +129,21 @@ const createNewList = (currentTask) => {
             listTask.classList.remove("hidden");
             newTaskInput.remove();
           });
-    }
+}
 
-    if(event.target.classList.contains("list-done-check")){
-     const listDoneCheck = list.querySelector(".list-done-check");
-        const listTask = list.querySelector(".list-task");
-        const listDelBtn = list.querySelector(".list-del-btn"); 
-        const listEditBtn = list.querySelector(".list-edit-btn");
+const doneList = (listId) => {
+  const currentList = document.querySelector(`#${listId}`);
+
+  const listDoneCheck = currentList.querySelector(".list-done-check");
+        const listTask = currentList.querySelector(".list-task");
+        const listDelBtn = currentList.querySelector(".list-del-btn"); 
+        const listEditBtn = currentList.querySelector(".list-edit-btn");
 
 
             listTask.classList.toggle("line-through");
             listTask.classList.add("duration-200");
-            list.classList.toggle("opacity-20");
-            list.classList.toggle("scale-90");
+            currentList.classList.toggle("opacity-20");
+            currentList.classList.toggle("scale-90");
             if(listDoneCheck.checked){
               listEditBtn.setAttribute("disabled",true)
             }else{
@@ -153,9 +151,40 @@ const createNewList = (currentTask) => {
             }
             updateDoneTaskTotal(); 
 
+}
+
+
+const addList = (text) => {
+  // mount to listGroup
+  listGroup.append(createNewList( text));
+  taskInput.value = null;
+  updateTaskTotal();
+};
+
+
+    // console.log(list);
+    // Application Logic
+    // Handlers
+
+    const listGroupHandler = (event) => {
+      const list = event.target.closest(".list");
+    if(event.target.classList.contains("list-del-btn")){
+      deleteList(event.target.closest(".list").id);
+    }
+
+    if(event.target.classList.contains("list-edit-btn")){
+      editList(event.target.closest(".list").id);
+    }
+
+    if(event.target.classList.contains("list-done-check")){
+      doneList(event.target.closest(".list").id);
     }
     };
 
-    //event
-    addTaskBtn.addEventListener("click",addList);
+      const addTaskBtnHandler = () => {
+        addList(taskInput.value);
+      };
+    
+    //listener
+    addTaskBtn.addEventListener("click",addTaskBtnHandler);
     listGroup.addEventListener("click",listGroupHandler)
