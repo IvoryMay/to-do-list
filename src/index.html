@@ -7,19 +7,22 @@
     <link rel="stylesheet" href="./app.css" />
   </head>
   <body class="bg-stone-200">
-    <main class="bg-stone-100 min-h-[500px] max-w-[400px]  mx-auto mt-10 p-10">
+    <main class="bg-stone-100 min-h-[500px] max-w-[400px] mx-auto mt-10 p-10">
       <header>
         <h1 class="text-3xl font-serif font-bold text-stone-950 mb-3">
           Task list
         </h1>
       </header>
       <section class="flex justify-between p-3">
-        <input type="text"
-        id="taskInput" 
-        class="flex-grow border border-stone-950 ps-2 focus-visible:outline-none" />
+        <input
+          type="text"
+          id="taskInput"
+          class="flex-grow border border-stone-950 ps-2 focus-visible:outline-none"
+        />
         <button
-        id="addTaskBtn"
-        class="bg-stone-950 w-12 h-12 flex justify-center items-center">
+          id="addTaskBtn"
+          class="bg-stone-950 w-12 h-12 flex justify-center items-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -47,15 +50,18 @@
             <span id="taskTotal">0</span>
           </div>
         </div>
-        <div class="list-group " id="listGroup">
+        <div class="list-group" id="listGroup">
           <div class="empty-state last:block hidden mt-20">
-            <div class="flex flex-col justify-center items-center ">
-              <img src="./img/undraw_no_data_re_kwbl.svg" class="w-32 mb-3" alt="">
-            <p class="font-serif">There is no list.</p>
-
+            <div class="flex flex-col justify-center items-center">
+              <img
+                src="./img/undraw_no_data_re_kwbl.svg"
+                class="w-32 mb-3"
+                alt=""
+              />
+              <p class="font-serif">There is no list.</p>
             </div>
           </div>
-  <!-- <div class="list">
+          <!-- <div class="list">
     <div class=" flex justify-between border border-stone-950 p-3 mb-3">
       <div class="flex gap-2 items-center">
         <input type="checkbox" />
@@ -73,12 +79,41 @@
       </div>
     </div>
   </div> -->
-
-          
         </div>
       </section>
-  <script src="./app.js"></script>
-
     </main>
+    <section class="flex justify-center gap-4">
+      <button
+        id="deleteAll"
+        class="bg-stone-950 text-stone-50 px-3 py-2 rounded-md flex  mt-3  gap-2 font-serif items-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
+          />
+        </svg>
+        Delete all
+      </button>
+      <button
+        id="doneAll"
+        class="bg-stone-950 text-stone-50 px-3 py-2 rounded-md flex gap-2 mt-3  font-serif items-center"
+      >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+      
+        Done all
+      </button>
+    </section>
+    <script src="./app.js"></script>
   </body>
 </html>

@@ -4,6 +4,8 @@ const addTaskBtn = document.querySelector("#addTaskBtn");
 const listGroup = document.querySelector("#listGroup");
 const doneTaskTotal = document.querySelector("#doneTaskTotal");
 const taskTotal = document.querySelector("#taskTotal");
+const deleteAll = document.querySelector("#deleteAll");
+const doneAll = document.querySelector("#doneAll");
 // let count = 1;
 
 //Actions ( Business Logic )
@@ -195,9 +197,52 @@ const taskInputHandler = (event) => {
   }
 };
 
+const deleteAllHandler = () => {
+  if(confirm("Are you sure to remove all lists?")){
+    const allList = listGroup.querySelectorAll(".list");
+    // console.log(allList);
+    allList.forEach((list) => list.remove()
+       
+    )
+  }
+};
 
+const doneAllHandler = () => {
+  if(confirm("Are you sure to check done all lists?")){
+    const allList = listGroup.querySelectorAll(".list");
+    // console.log(allList);
+    allList.forEach((list) => {
+      list.querySelector(".list-done-check").checked = true;
+      doneList(list.id);
+    }
+       
+    );
+  }
+};
 
 //listener
 addTaskBtn.addEventListener("click", addTaskBtnHandler);
 listGroup.addEventListener("click", listGroupHandler);
 taskInput.addEventListener("keyup",taskInputHandler);
+doneAll.addEventListener("click",doneAllHandler);
+
+// DOM Node
+
+// const myName = document.createTextNode("Theint Sandi Kyaw");
+// document.body.append(myName);
+// console.dir(myName);
+
+// const myAge = document.createTextNode(34);
+// const myJob = document.createTextNode("web developer");
+
+// const mySelf = document.createDocumentFragment();
+
+// mySelf.append(myName);
+// mySelf.append(myAge);
+// mySelf.append(myJob);
+
+// document.body.append(mySelf);
+// console.log(document.body.childNodes);
+// console.log(document.body.children);
+// console.log(deleteAll.childNodes);
+// deleteAll.childNodes[1].nodeValue = "ha ha";
