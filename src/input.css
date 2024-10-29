@@ -1,3 +1,10 @@
+
+@import url("../node_modules/animate.css/animate.css");
+
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
