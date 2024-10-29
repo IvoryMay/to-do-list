@@ -187,7 +187,11 @@ const addTaskBtnHandler = () => {
 
 const taskInputHandler = (event) => {
   if(event.key === "Enter"){
-addList(taskInput.value);
+    if(taskInput.value.trim()){
+      addList(taskInput.value);
+    }else{
+      alert("You must input task");
+    }
   }
 };
 
